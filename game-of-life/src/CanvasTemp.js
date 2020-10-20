@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-const CanvasTemp = (props) => {
+const CanvasTemp = () => {
   const canvasRef = useRef(null);
 
   let matrix = [];
@@ -9,7 +9,7 @@ const CanvasTemp = (props) => {
   const defaults = {
     cellsX : 25,
     cellsY: 25,
-    cellSize: 25,
+    cellSize: 20,
     rules: "23/3",
     gridColor: "#eee",
     cellColor: "#ccc"
@@ -24,6 +24,14 @@ const CanvasTemp = (props) => {
       matrix[i][y] = false;
     };
   };
+
+  // onClick for cells
+  const toggleState = (e) => {
+
+    e.preventDefault();
+  };
+
+  matrix[0][0] = true;
 
   const draw = (context) => {
     let x = null;
@@ -52,37 +60,25 @@ const CanvasTemp = (props) => {
       for (y = 0; y < matrix[x].length; y++) {
         if (matrix[x][y]) {
           context.fillRect(
-            x * defaults.cellSize + 1,
-            y * defaults.cellSize + 1,
-            defaults.cellSize - 1,
-            defaults.cellSize - 1);
+            x * defaults.cellSize + 1, y * defaults.cellSize + 1, defaults.cellSize - 1, defaults.cellSize - 1);
         }
       }
     };
-
   };
 
   useEffect(() => {
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
-    //Our first draw
-    // context.fillStyle = 'rgb(200, 0, 0)';
-    // context.fillRect(10, 10, 75, 75);
-
-    // context.fillStyle = 'rgba(0, 0, 200, 0.5)';
-    // context.fillRect(37.5, 37.5, 75, 75);
     draw(context);
-  }, [])
+  }, [draw])
 
   return <canvas 
     className="canvas1"
-    ref={canvasRef} 
-    // width={props.width}
-    // height={props.height}
+    ref={canvasRef}
+    onClick={toggleState}
     width={defaults.cellsX * defaults.cellSize}
     height={defaults.cellsY * defaults.cellSize}
   />
 };
-// test
 
 export default CanvasTemp;
