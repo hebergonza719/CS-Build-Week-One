@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { countNeighbors } from './CountNeighbors';
 
-const Grid = ({matrix}) => {
+const Grid = ({ matrix }) => {
   const [refresh, setRefresh] = useState(false);
 
   const toggleStatus = (cx, cy) => (e) => {
     e.preventDefault();
-    matrix[cx][cy] = !matrix[cx][cy]
+    matrix[cx][cy] = !matrix[cx][cy];
     // console.log(index, index2);
-    console.log(countNeighbors(cx, cy, matrix))
-    setRefresh(!refresh)
+    console.log(countNeighbors(cx, cy, matrix));
+    setRefresh(!refresh);
   };
 
   useEffect(() => {
