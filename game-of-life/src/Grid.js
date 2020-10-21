@@ -6,7 +6,7 @@ const Grid = ({ matrix }) => {
 
   const toggleStatus = (cx, cy) => (e) => {
     e.preventDefault();
-    matrix[cx][cy] = !matrix[cx][cy];
+    matrix[cx][cy].isAlive = !matrix[cx][cy].isAlive;
     // console.log(index, index2);
     console.log(countNeighbors(cx, cy, matrix));
     setRefresh(!refresh);
@@ -24,7 +24,7 @@ const Grid = ({ matrix }) => {
             <div 
               onClick={toggleStatus(index, index2)} 
               key={index2}
-              className={matrix[index][index2] === true ? 'cells-alive' : 'cells-dead'}
+              className={matrix[index][index2].isAlive === true ? 'cells-alive' : 'cells-dead'}
             >
             </div>
           ))
