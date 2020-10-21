@@ -25,7 +25,7 @@ function App() {
 
   return ( 
       <div>
-        <Grid matrix={matrix}/>
+        <Grid matrix={matrix} dimension={dimension}/>
       </div>
   )
 }
