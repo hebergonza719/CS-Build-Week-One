@@ -19,6 +19,8 @@ function App() {
     };
   };
 
+  let [matrix1, setMatrix1] = useState(matrix);
+
   const toggleClear = (e) => {
     e.preventDefault();
     for (let x = 0; x < matrix.length; x++) {
