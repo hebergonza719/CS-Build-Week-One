@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { countNeighbors } from './CountNeighbors';
+import { setBuffer } from './SetBuffer';
 
-const Grid = ({ matrix }) => {
+const Grid = ({ matrix, dimension }) => {
   const [refresh, setRefresh] = useState(false);
 
   const toggleStatus = (cx, cy) => (e) => {
@@ -25,14 +26,40 @@ const Grid = ({ matrix }) => {
     e.preventDefault();
     for (let x = 0; x < matrix.length; x++) {
       for (let y = 0; y < matrix[x].length; y++) {
-        matrix[x][y].isAlive = Math.random() >= 0.85;
+        matrix[x][y].isAlive = Math.random() >= 0.7;
       };
     };
     setRefresh(!refresh);
   };
 
-  useEffect(() => {
+  const nextGen = (e) => {
+    e.preventDefault();
+    // needs to be in here in order to refresh
+    let buffer = new Array(dimension.row);
 
+    for (let i = 0; i < buffer.length; i++) {
+      buffer[i] = new Array(dimension.col);
+      for (let y = 0; y < buffer[i].length; y++) {
+        buffer[i][y] = {
+          isAlive: false,
+          isToggleable: true,
+          neighbors: countNeighbors()
+        };
+      };
+    };
+
+    buffer = setBuffer(buffer, matrix);
+
+    for (let x = 0; x < matrix.length; x++) {
+      for (let y = 0; y < matrix[x].length; y++) {
+        matrix[x][y] = buffer[x][y];
+      };
+    };
+
+    setRefresh(!refresh);
+  };
+
+  useEffect(() => {
   }, [refresh]);
 
   return (
@@ -54,6 +81,7 @@ const Grid = ({ matrix }) => {
       </div>
       <button onClick={toggleClear}>Clear</button>
       <button onClick={toggleRandom}>Random</button>
+      <button onClick={nextGen}>Next Generation</button>
     </div>
   )
 };
