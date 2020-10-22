@@ -7,6 +7,12 @@ const Grid = ({ matrix, dimension }) => {
   let [gameOn, setGameOn] = useState(false);
   let [generation, setGeneration] = useState(0);
 
+  const slow = 1000;
+  const normal = 350;
+  const fast = 100;
+
+  let [speed, setSpeed] = useState(normal);
+
   const toggleStatus = (cx, cy) => (e) => {
     e.preventDefault();
     matrix[cx][cy].isAlive = !matrix[cx][cy].isAlive;
@@ -74,7 +80,7 @@ const Grid = ({ matrix, dimension }) => {
     e.preventDefault();
     setGameOn(true);
     setGeneration(generation++);
-    setInter(setInterval(function() { setNextGen(); }, 500));
+    setInter(setInterval(function() { setNextGen(); }, `${speed}`));
   };
 
   const stopGame = (e) => {
@@ -84,12 +90,18 @@ const Grid = ({ matrix, dimension }) => {
   };
 
   useEffect(() => {
-    console.log(generation)
   }, [refresh]);
 
   return (
     <div>
-      <div>Generation: {generation}</div>
+      <div>
+        <div>Generation: {generation}</div>
+        <button onClick={handleNextGen}>Next Generation</button>
+        <div>{speed === 100 ? "Speed: Fast" : null}</div>
+        <div>{speed === 350 ? "Speed: Normal" : null}</div>
+        <div>{speed === 1000? "Speed: Slow" : null}</div>
+      </div>
+
       <div className="grid-container">
         {matrix.map((x, index) => (
           <div key={index} className="row">
@@ -109,8 +121,13 @@ const Grid = ({ matrix, dimension }) => {
         <button onClick={startGame}>Start</button>
         <button onClick={stopGame}>Stop</button>
         <button onClick={toggleRandom}>Random</button>
-        <button onClick={handleNextGen}>Next Generation</button>
         <button onClick={toggleClear}>Clear</button>
+        <div>
+          <h4>Select Speed</h4>
+          <button onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(slow);} : null}>Slow</button>
+          <button onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(normal);} : null}>Normal</button>
+          <button onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(fast);} : null}>Fast</button>
+        </div>
       </div>
     </div>
   )

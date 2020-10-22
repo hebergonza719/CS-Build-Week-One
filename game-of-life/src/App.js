@@ -17,7 +17,6 @@ function App() {
     for (let y = 0; y < matrix[i].length; y++) {
       matrix[i][y] = {
         isAlive: false,
-        // isToggleable: true,
         neighbors: countNeighbors()
       };
     };
