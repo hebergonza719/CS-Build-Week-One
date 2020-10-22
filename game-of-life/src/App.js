@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from './Grid';
 import './App.css';
-import { countNeighbors } from './CountNeighbors';
+import { countNeighbors } from './helper/Helpers';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
     for (let y = 0; y < matrix[i].length; y++) {
       matrix[i][y] = {
         isAlive: false,
-        isToggleable: true,
+        // isToggleable: true,
         neighbors: countNeighbors()
       };
     };
