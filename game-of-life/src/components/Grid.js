@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { countNeighbors, setBuffer } from './helper/Helpers'
+import { countNeighbors, setBuffer } from '../helper/Helpers';
+import '../App.css';
 
 const Grid = ({ matrix, dimension }) => {
   let [refresh, setRefresh] = useState(false);
@@ -94,39 +95,49 @@ const Grid = ({ matrix, dimension }) => {
 
   return (
     <div>
-      <div>
-        <div>Generation: {generation}</div>
-        <button onClick={handleNextGen}>Next Generation</button>
-        <div>{speed === 100 ? "Speed: Fast" : null}</div>
-        <div>{speed === 350 ? "Speed: Normal" : null}</div>
-        <div>{speed === 1000? "Speed: Slow" : null}</div>
+      <div className="gen-and-speed">
+        <div className="gen-container">
+          <div className="gen-title">Generation: {generation}</div>
+          <button className="gen-button buttons" onClick={handleNextGen}>Next-Gen</button>         
+        </div>
+        <div className="speed-title">{speed === 100 ? "Speed: Fast" : undefined}</div>
+        <div className="speed-title">{speed === 350 ? "Speed: Normal" : undefined}</div>
+        <div className="speed-title">{speed === 1000? "Speed: Slow" : undefined}</div>
       </div>
 
-      <div className="grid-container">
-        {matrix.map((x, index) => (
-          <div key={index} className="row">
-            {x.map((y, index2) => (
-              <div 
-                onClick={!gameOn ? toggleStatus(index, index2) : null} 
-                key={index2}
-                className={matrix[index][index2].isAlive ? 'cells-alive' : 'cells-dead'}
-              >
-              </div>
-            ))
-            }
-          </div>
-        ))}
-      </div>
       <div>
-        <button onClick={startGame}>Start</button>
-        <button onClick={stopGame}>Stop</button>
-        <button onClick={toggleRandom}>Random</button>
-        <button onClick={toggleClear}>Clear</button>
+        <div className="grid-container">
+          {matrix.map((x, index) => (
+            <div key={index} className="row">
+              {x.map((y, index2) => (
+                <div 
+                  onClick={!gameOn ? toggleStatus(index, index2) : null} 
+                  key={index2}
+                  className={matrix[index][index2].isAlive ? 'cells-alive' : 'cells-dead'}
+                >
+                </div>
+              ))
+              }
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h4>Main Controls</h4>
+        <div className="button-container">
+          <button className="buttons" onClick={!gameOn ? startGame : null}>Start</button>
+          <button className="buttons" onClick={stopGame}>Stop</button>
+          <button className="buttons" onClick={toggleRandom}>Random</button>
+          <button className="buttons" onClick={toggleClear}>Clear</button>
+        </div>
         <div>
           <h4>Select Speed</h4>
-          <button onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(slow);} : null}>Slow</button>
-          <button onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(normal);} : null}>Normal</button>
-          <button onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(fast);} : null}>Fast</button>
+          <div className="speed-button-container">
+            <button className="buttons" onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(slow);} : null}>Slow</button>
+            <button className="buttons" onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(normal);} : null}>Normal</button>
+            <button className="buttons" onClick={!gameOn ? (e) => {e.preventDefault(); setSpeed(fast);} : null}>Fast</button>
+          </div>
         </div>
       </div>
     </div>
