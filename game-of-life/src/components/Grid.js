@@ -90,6 +90,99 @@ const Grid = ({ matrix, dimension }) => {
     setGameOn(false);
   };
 
+  const glider = (e) => {
+    e.preventDefault();
+    matrix[0][1].isAlive = true;
+    matrix[1][2].isAlive = true;
+    matrix[2][0].isAlive = true;
+    matrix[2][1].isAlive = true;
+    matrix[2][2].isAlive = true;
+    setRefresh(!refresh);
+  };
+
+  const lwss = (e) => {
+    e.preventDefault();
+    matrix[8][0].isAlive = true;
+    matrix[10][0].isAlive = true;
+    matrix[11][1].isAlive = true;
+    matrix[11][2].isAlive = true;
+    matrix[11][3].isAlive = true;
+    matrix[11][4].isAlive = true;
+    matrix[10][4].isAlive = true;
+    matrix[9][4].isAlive = true;
+    matrix[8][3].isAlive = true;
+    setRefresh(!refresh);
+  };
+
+  const mwss = (e) => {
+    e.preventDefault();
+    matrix[8][0].isAlive = true;
+    matrix[10][0].isAlive = true;
+    matrix[11][1].isAlive = true;
+    matrix[11][2].isAlive = true;
+    matrix[11][3].isAlive = true;
+    matrix[11][4].isAlive = true;
+    matrix[11][5].isAlive = true;
+    matrix[7][2].isAlive = true;
+    matrix[8][4].isAlive = true;
+    matrix[9][5].isAlive = true;
+    matrix[10][5].isAlive = true;
+    setRefresh(!refresh);
+  };
+
+  const pulsar = (e) => {
+    e.preventDefault();
+    matrix[9][11].isAlive = true;
+    matrix[10][11].isAlive = true;
+    matrix[11][11].isAlive = true;
+    matrix[9][13].isAlive = true;
+    matrix[10][13].isAlive = true;
+    matrix[11][13].isAlive = true;
+    matrix[12][8].isAlive = true;
+    matrix[12][9].isAlive = true;
+    matrix[12][10].isAlive = true;
+    matrix[14][8].isAlive = true;
+    matrix[14][9].isAlive = true;
+    matrix[14][10].isAlive = true;
+    matrix[12][14].isAlive = true;
+    matrix[12][15].isAlive = true;
+    matrix[12][16].isAlive = true;
+    matrix[14][14].isAlive = true;
+    matrix[14][15].isAlive = true;
+    matrix[14][16].isAlive = true;
+    matrix[15][11].isAlive = true;
+    matrix[16][11].isAlive = true;
+    matrix[17][11].isAlive = true;
+    matrix[15][13].isAlive = true;
+    matrix[16][13].isAlive = true;
+    matrix[17][13].isAlive = true;
+    matrix[7][8].isAlive = true;
+    matrix[7][9].isAlive = true;
+    matrix[7][10].isAlive = true;
+    matrix[7][14].isAlive = true;
+    matrix[7][15].isAlive = true;
+    matrix[7][16].isAlive = true;
+    matrix[19][8].isAlive = true;
+    matrix[19][9].isAlive = true;
+    matrix[19][10].isAlive = true;
+    matrix[19][14].isAlive = true;
+    matrix[19][15].isAlive = true;
+    matrix[19][16].isAlive = true;
+    matrix[9][6].isAlive = true;
+    matrix[10][6].isAlive = true;
+    matrix[11][6].isAlive = true;
+    matrix[9][18].isAlive = true;
+    matrix[10][18].isAlive = true;
+    matrix[11][18].isAlive = true;
+    matrix[15][6].isAlive = true;
+    matrix[16][6].isAlive = true;
+    matrix[17][6].isAlive = true;
+    matrix[15][18].isAlive = true;
+    matrix[16][18].isAlive = true;
+    matrix[17][18].isAlive = true;
+    setRefresh(!refresh);
+  };
+
   useEffect(() => {
   }, [refresh]);
 
@@ -103,6 +196,13 @@ const Grid = ({ matrix, dimension }) => {
         <div className="speed-title">{speed === 100 ? "Speed: Fast" : undefined}</div>
         <div className="speed-title">{speed === 350 ? "Speed: Normal" : undefined}</div>
         <div className="speed-title">{speed === 1000? "Speed: Slow" : undefined}</div>
+        <h4>Preset Shapes</h4>
+        <div className="preset-buttons">
+          <button className="buttons-preset" onClick={glider}>Glider</button>
+          <button className="buttons-preset" onClick={lwss}>Lightweight Spaceship</button>
+          <button className="buttons-preset" onClick={mwss}>Middleweight Spaceship</button>
+          <button className="buttons-preset" onClick={pulsar}>Pulsar</button>
+        </div>
       </div>
 
       <div>
