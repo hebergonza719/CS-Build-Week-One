@@ -4,7 +4,6 @@ import './App.css';
 import { countNeighbors } from './helper/Helpers';
 
 function App() {
-
   const dimension = {
     row: 25,
     col: 25
@@ -44,9 +43,10 @@ function App() {
         <div className="about-container">
           <div>
             <h3>About this Algorithm:</h3>
-            <p>The Game of Life is not your typical computer game. It is a cellular automaton, and was invented by Cambridge mathematician John Conway.</p>
+            <p>The Game of Life is not a typical computer game. It was invented by Cambridge mathematician John Conway.</p> 
+            <p>It is a cellular Automaton which is a collection of cells in a 2D grid that change state on every step depending on a set of rules.</p>
+            <p>This game consists of a 25x25 grid of cells which can live, die or multiply based on a few mathematical rules.</p>
             <p>This game became widely known when it was mentioned in an article published by Scientific American in 1970.</p>
-            <p>It consists of a collection of cells which, based on a few mathematical rules, can live, die or multiply.</p>
             <p>Depending on the initial conditions, the cells form various patterns throughout the course of the game.</p>
           </div>
         </div>

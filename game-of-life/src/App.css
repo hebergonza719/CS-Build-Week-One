@@ -90,3 +90,15 @@
   background-color: lightgray;
   color: black;
 }
+
+.buttons-preset {
+  background-color: lightgray;
+  color: black;
+  width: 105px;
+}
+
+.preset-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+}
